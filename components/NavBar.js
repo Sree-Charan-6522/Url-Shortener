@@ -1,0 +1,135 @@
+// Description: A responsive navigation bar component for a URL shortener application.
+'use client'
+import React, { useState } from 'react'
+import { Menu, X } from 'lucide-react' // icon library (optional)
+import Link from 'next/link'
+import { useSession, signIn, signOut } from "next-auth/react"
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect, useRef } from "react";
+
+const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const { data: session,status } = useSession()
+
+  const hasShownToast = useRef(false);
+
+  useEffect(() => {
+    if (status === "authenticated" && !hasShownToast.current) {
+      toast.success(`Welcome back, ${session?.user?.name}!`, {
+        position: "top-right",
+        autoClose: 2000,
+        theme: "colored",
+      });
+      hasShownToast.current = true;
+    }
+  }, [session, status]);
+
+  const handleSignOut = async () => {
+    toast.success('Yo signed out!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Flip,
+    });
+
+    setTimeout(async () => {
+      await signOut({ redirect: false }); // prevent immediate page reload
+    }, 1000); // let toast show before signing out
+  };
+  
+  return (
+    <>
+    <ToastContainer
+    position="top-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="colored"
+    transition={Flip}
+    />
+      <nav className="bg-[#444444] text-white shadow-[-12px_15px_45px_#FF4C4C33] max-md:!px-6 !py-2  relative">
+        <div className="flex justify-around max-md:justify-between  items-center">
+          <div className="max-md:hidden text-xl font-bold text-accent-red"><Link href="/">URL-Shortener</Link></div>
+          <div className="hidden max-md:block text-xl font-bold text-accent-red"><Link href="/">URL-S</Link></div>
+
+          {/* Desktop Nav Links */}
+          <ul className="hidden md:flex gap-6 items-center text-sm text-dark-muted">
+            <li onClick={()=>{}}className="hover:text-[#FF4C4C] cursor-pointer"><Link href="/">Home</Link></li>
+            <li className="hover:text-[#FF4C4C] cursor-pointer"><Link href="/About">About</Link></li>
+            <li className="hover:text-[#FF4C4C] cursor-pointer"><Link href="/Shorten">Shorten</Link></li>
+            <li className="hover:text-[#FF4C4C] cursor-pointer"><Link href="/Contact">Contact Us</Link></li>
+          </ul>
+
+          {/* Buttons */}
+          <div className="hidden md:flex gap-3">
+            <button className="bg-accent-red hover:bg-accent-redHover !px-2 !py-1 rounded text-sm">
+              <Link href="/Shorten">Try Now</Link>
+            </button>
+            <button className="border border-accent-red text-accent-red hover:bg-accent-red hover:text-white !px-2 !py-1 rounded text-sm">
+              {session ? (
+                
+                <div className='flex gap-2 items-center cursor-pointer' onClick={() => { handleSignOut()}}>
+                  <img src={session.user.image} className='h-6 w-6 rounded' alt="" />
+                  <span>{session.user.name}</span>
+                </div>
+              ) : (
+                <Link href="/login">Login</Link>
+              )
+              }
+            </button>
+          </div>
+
+          {/* Mobile Hamburger Icon */}
+          <div className="md:hidden">
+            <button onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Dropdown Menu */}
+        {isOpen && (
+          <div className="md:hidden mt-4 bg-dark-contrast rounded-lg p-4 space-y-2 text-sm text-dark-muted">
+            <div className='flex flex-col justify-center items-center gap-2'>
+              <Link className='hover:text-[#FF4C4C]' href="/">Home</Link>
+              <Link className='hover:text-[#FF4C4C]' href="/About">About</Link>
+              <Link className='hover:text-[#FF4C4C]' href="/Shorten">Shorten</Link>
+              <Link className='hover:text-[#FF4C4C]' href="/Contact">Contact Us</Link>
+            </div>
+            <div className="pt-2 flex flex-col gap-2">
+              <button className="bg-accent-red hover:bg-accent-redHover px-4 py-2 rounded text-sm">
+                <Link href="/Shorten">Try Now</Link>
+              </button>
+              <button className="border border-accent-red text-accent-red hover:bg-accent-red hover:text-white px-4 py-2 rounded text-sm">
+                {session ? (
+                  <div className='flex gap-2 items-center' onClick={() => handleSignOut()}>
+                    <img src={session.user.image} className='h-6 w-6 rounded' alt="" />
+                    <span>{session.user.name}</span>
+                  </div>
+
+                ) : (
+                  <Link href="/login">Login</Link>
+                )
+                }
+              </button>
+            </div>
+          </div>
+        )}
+      </nav>
+
+    </>
+  )
+}
+
+export default NavBar
