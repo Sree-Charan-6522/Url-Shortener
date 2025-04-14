@@ -5,7 +5,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import Link from 'next/link'
 import { motion } from "framer-motion";
 
-const login = () => {
+const Login = () => {
     const { data: session } = useSession()
     if (session) {
         return <>
@@ -64,4 +64,4 @@ const login = () => {
     }
 }
 
-export default login
+export default Login
