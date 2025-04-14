@@ -1,0 +1,18 @@
+import React from 'react'
+import { siNextdotjs } from "simple-icons/icons";
+import Link from 'next/link';
+
+const Footer = () => {
+  return (
+    // max-md:bottom-[-260px]
+    <div className='fixed bottom-0  text-white w-full flex flex-col bg-[#444444] items-center justify-center h-15'>
+    <div className='flex items-center gap-2'>
+      <span>Created with</span>
+      <Link target='_blank' href="https://nextjs.org/"><svg role="img" viewBox="0 0 24 24" height={20} width={20} xmlns="http://www.w3.org/2000/svg" dangerouslySetInnerHTML={{ __html: siNextdotjs.svg }} fill={`#${siNextdotjs.hex}`}/></Link>
+      <span>by <Link target='_blank' href="https://github.com/Sree-Charan-6522"><strong>MR.Introvert.6522...</strong></Link></span>
+    </div>
+  </div>
+  )
+}
+
+export default Footer

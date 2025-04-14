@@ -47,7 +47,7 @@ export default function Home() {
 
 
   return (
-    <div className=" text-white flex max-md:flex max-md:flex-col max-md:h-[50em] w-screen h-[53.7em]">
+    <div className=" text-white flex max-md:flex max-md:flex-col max-md:h-[55em] w-screen h-[53.7em]">
 
       <div className="w-[80%] max-md:h-[50%] max-md:w-full flex flex-col max-md: justify-center items-center !mt-5 gap-4 !px-4">
         <h1 className="!text-3xl text-center text-shadow-[0px_25px_50px_#FF4C4C33]">The best <strong><Link href="/">URL-Shortener</Link></strong> in the Market</h1>
@@ -56,7 +56,7 @@ export default function Home() {
             <TypewriterEffect />
         </div>
       </div>
-      <div className="w-[20%] max-md:h-[50%] max-md:w-full flex justify-center max-md:justify-center max-md:items-center items-center">
+      <div className="w-[20%] max-md:h-[50%] max-md:w-full flex justify-center max-md:justify-center max-md:items-start items-center">
       
         <div className="relative  h-80 w-80  rounded-full overflow-hidden shadow-[10px_10px_100px_#ff818199] max-md:shadow-[0px_0px_80px_#f47979e8]">
         <Image className="max-md:hidden" src="/me.png" alt="me" fill={true} />
