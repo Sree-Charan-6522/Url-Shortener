@@ -50,7 +50,7 @@ export default async function Page({ params }) {
   await connect()
   
   // Access params directly, don't destructure
-  const { shorturl } = params;
+  const shorturl = params.shorturl;
   console.log("➡️ shorturl param:", shorturl)
 
   // Find the record based on the short URL
