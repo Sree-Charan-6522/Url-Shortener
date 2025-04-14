@@ -51,16 +51,20 @@ export default async function Page({ params }) {
   
   // Access params directly, don't destructure
   const { shorturl } = params;
+  console.log("➡️ shorturl param:", shorturl)
 
   // Find the record based on the short URL
   const record = await Url.findOne({ shortName: shorturl })
+  console.log("🔎 Found record in DB:", record) 
 
   if (!record) {
+    console.log("❌ No record found, redirecting to /")
     // Redirect to home if the short URL is not found
     redirect('/');
     return null;
   }
 
+  console.log("✅ Redirecting to:", record.longUrl)
   // Redirect to the long URL if the record is found
   redirect(record.longUrl)
 }
