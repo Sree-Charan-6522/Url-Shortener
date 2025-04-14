@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import mongoose from 'mongoose'
 
+
 const connect = async () => {
   if (mongoose.connections[0].readyState) return
   await mongoose.connect(process.env.MONGODB_URI, {
@@ -36,4 +37,8 @@ export async function POST(req) {
     console.error("Error in /api/shorten:", error)
     return NextResponse.json({ error: 'Internal Server Error', detail: error.message }, { status: 500 })
   }
+}
+
+export async function GET() {
+  return NextResponse.json({ message: "API is working!" })
 }

@@ -7,6 +7,7 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useRef } from "react";
+import { motion } from 'framer-motion'
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -65,29 +66,33 @@ const NavBar = () => {
 
           {/* Desktop Nav Links */}
           <ul className="hidden md:flex gap-6 items-center text-sm text-dark-muted">
-            <li onClick={()=>{}}className="hover:text-[#FF4C4C] cursor-pointer"><Link href="/">Home</Link></li>
-            <li className="hover:text-[#FF4C4C] cursor-pointer"><Link href="/About">About</Link></li>
-            <li className="hover:text-[#FF4C4C] cursor-pointer"><Link href="/Shorten">Shorten</Link></li>
-            <li className="hover:text-[#FF4C4C] cursor-pointer"><Link href="/Contact">Contact Us</Link></li>
+            <Link href="/"><li onClick={()=>{}}className="hover:text-[#FF4C4C] cursor-pointer">Home</li></Link>
+            <Link href="/About"><li className="hover:text-[#FF4C4C] cursor-pointer">About</li></Link>
+            <Link href="/Shorten"><li className="hover:text-[#FF4C4C] cursor-pointer">Shorten</li></Link>
+            <Link href="/Contact"><li className="hover:text-[#FF4C4C] cursor-pointer">Contact Us</li></Link>
           </ul>
 
           {/* Buttons */}
-          <div className="hidden md:flex gap-3">
-            <button className="bg-accent-red hover:bg-accent-redHover !px-2 !py-1 rounded text-sm">
-              <Link href="/Shorten">Try Now</Link>
-            </button>
-            <button className="border border-accent-red text-accent-red hover:bg-accent-red hover:text-white !px-2 !py-1 rounded text-sm">
+          <div className="hidden md:flex gap-5 h-8">
+          <motion.div className='hover:!text-lg' whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <button className="bg-accent-red hover:bg-accent-redHover !px-2 !py-1 rounded !text-sm">
+                  <Link href="/Shorten">Try Now</Link>
+                  </button>
+                </motion.div>
+          <motion.div className='hover:!text-lg' whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <button className="border border-accent-red text-accent-red hover:bg-accent-red hover:text-white !px-2 !py-1 rounded !text-sm">
               {session ? (
                 
-                <div className='flex gap-2 items-center cursor-pointer' onClick={() => { handleSignOut()}}>
-                  <img src={session.user.image} className='h-6 w-6 rounded' alt="" />
+                <div className='flex gap-2 items-center cursor-pointer !text-sm' onClick={() => { handleSignOut()}}>
+                  <img src={session.user.image} className='h-4 w-4 rounded' alt="" />
                   <span>{session.user.name}</span>
                 </div>
               ) : (
                 <Link href="/login">Login</Link>
               )
-              }
+            }
             </button>
+            </motion.div>
           </div>
 
           {/* Mobile Hamburger Icon */}
@@ -100,18 +105,18 @@ const NavBar = () => {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="md:hidden mt-4 bg-dark-contrast rounded-lg p-4 space-y-2 text-sm text-dark-muted">
-            <div className='flex flex-col justify-center items-center gap-2'>
+          <div className="md:hidden !mt-4 bg-dark-contrast rounded-lg !p-4 space-y-2 !text-sm text-dark-muted ">
+            <div className='flex flex-col justify-center items-center gap-2 !mb-4'>
               <Link className='hover:text-[#FF4C4C]' href="/">Home</Link>
               <Link className='hover:text-[#FF4C4C]' href="/About">About</Link>
               <Link className='hover:text-[#FF4C4C]' href="/Shorten">Shorten</Link>
               <Link className='hover:text-[#FF4C4C]' href="/Contact">Contact Us</Link>
             </div>
-            <div className="pt-2 flex flex-col gap-2">
-              <button className="bg-accent-red hover:bg-accent-redHover px-4 py-2 rounded text-sm">
+            <div className="!pt-2 flex flex-col gap-2">
+              <button className="bg-accent-red hover:bg-accent-redHover !px-4 !py-2 rounded !text-sm">
                 <Link href="/Shorten">Try Now</Link>
               </button>
-              <button className="border border-accent-red text-accent-red hover:bg-accent-red hover:text-white px-4 py-2 rounded text-sm">
+              <button className="border border-accent-red text-accent-red hover:bg-accent-red hover:text-white !px-4 !py-2 rounded !text-sm">
                 {session ? (
                   <div className='flex gap-2 items-center' onClick={() => handleSignOut()}>
                     <img src={session.user.image} className='h-6 w-6 rounded' alt="" />

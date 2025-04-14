@@ -31,4 +31,5 @@ button {
 
 button:hover {
   background-color: #FF6B6B;
+  color:aquamarine;
 }
