@@ -21,7 +21,7 @@ const Short = () => {
 
       if (response.ok) {
         // Set the shortened link to the state
-        setShortenedLink(`http://localhost:3000/${data.shortName}`);
+        setShortenedLink(`https://url-shortener-q7ip.vercel.app/${data.shortName}`);
       } else {
         console.error(data.error || 'Error shortening URL');
         alert(data.error || 'Error shortening URL');
