@@ -59,7 +59,7 @@ const NavBar = () => {
     theme="colored"
     transition={Flip}
     />
-      <nav className="bg-[#444444] text-white shadow-[-12px_15px_45px_#FF4C4C33] max-md:!px-6 !py-2  relative">
+      <nav className="bg-[#444444] text-white shadow-[0px_15px_45px_#FF4C4C33] max-md:!px-6 !py-2  relative">
         <div className="flex justify-around max-md:justify-between  items-center">
           <div className="max-md:hidden text-xl font-bold text-accent-red"><Link href="/">URL-Shortener</Link></div>
           <div className="hidden max-md:block text-xl font-bold text-accent-red"><Link href="/">URL-S</Link></div>
