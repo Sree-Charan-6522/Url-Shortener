@@ -100,7 +100,7 @@ export default function Home() {
     <div className="relative w-full bg-dark text-white">
       <div
         className="flex flex-col items-center justify-start w-full px-4 py-10 sm:py-16 gap-12 max-md:min-h-[140vh] max-md:overflow-y-auto">
-         {/* modify below  Header good and neat look         */}
+        {/* modify below  Header good and neat look         */}
         <div className="w-full max-w-4xl text-left max-md:text-center !mt-10 !mb-8">
           <h1 className="!text-4xl sm:text-5xl font-extrabold mb-6 leading-tight">
             The best <strong><Link href="/">URL-Shortener</Link></strong> in the Market
@@ -151,7 +151,7 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:underline break-words !underline"
-                  >
+                >
                   {shortenedLink} click Here
                 </a>
               </p>
@@ -160,7 +160,9 @@ export default function Home() {
         </div>
 
         {/* Typewriter Effect */}
-        <TypewriterEffect />
+        <div className="!mb-[75px]">
+          <TypewriterEffect />
+        </div>
       </div>
     </div>
   );
