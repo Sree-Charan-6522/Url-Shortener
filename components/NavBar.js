@@ -1,7 +1,7 @@
 // Description: A responsive navigation bar component for a URL shortener application.
 'use client'
 import React, { useState } from 'react'
-import { Menu, X } from 'lucide-react' // icon library (optional)
+import { Menu, X } from 'lucide-react' // icon libra</div>ry (optional)
 import Link from 'next/link'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { ToastContainer, toast, Flip } from 'react-toastify';
@@ -68,17 +68,12 @@ const NavBar = () => {
           <ul className="hidden md:flex gap-6 items-center text-sm text-dark-muted">
             <Link href="/"><li onClick={()=>{}}className="hover:text-[#FF4C4C] cursor-pointer">Home</li></Link>
             <Link href="/About"><li className="hover:text-[#FF4C4C] cursor-pointer">About</li></Link>
-            <Link href="/Shorten"><li className="hover:text-[#FF4C4C] cursor-pointer">Shorten</li></Link>
             <Link href="/Contact"><li className="hover:text-[#FF4C4C] cursor-pointer">Contact Us</li></Link>
+            <Link href="/history"><li className="hover:text-[#FF4C4C] cursor-pointer">History</li></Link>
           </ul>
 
           {/* Buttons */}
-          <div className="hidden md:flex gap-5 h-8">
-          <motion.div className='hover:!text-lg' whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <button className="bg-accent-red hover:bg-accent-redHover !px-2 !py-1 rounded !text-sm">
-                  <Link href="/Shorten">Try Now</Link>
-                  </button>
-                </motion.div>
+          <div className="hidden md:flex gap-5 h-8">          
           <motion.div className='hover:!text-lg' whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             <button className="border border-accent-red text-accent-red hover:bg-accent-red hover:text-white !px-2 !py-1 rounded !text-sm">
               {session ? (
@@ -107,15 +102,12 @@ const NavBar = () => {
         {isOpen && (
           <div className="md:hidden !mt-4 bg-dark-contrast rounded-lg !p-4 space-y-2 !text-sm text-dark-muted ">
             <div className='flex flex-col justify-center items-center gap-2 !mb-4'>
-              <Link className='hover:text-[#FF4C4C]' href="/">Home</Link>
-              <Link className='hover:text-[#FF4C4C]' href="/About">About</Link>
-              <Link className='hover:text-[#FF4C4C]' href="/Shorten">Shorten</Link>
-              <Link className='hover:text-[#FF4C4C]' href="/Contact">Contact Us</Link>
+              <Link className='hover:text-[#FF4C4C]' href="/" onClick={() => setIsOpen(false)}>Home</Link>
+              <Link className='hover:text-[#FF4C4C]' href="/About" onClick={() => setIsOpen(false)}>About</Link>
+              <Link className='hover:text-[#FF4C4C]' href="/Contact" onClick={() => setIsOpen(false)}>Contact Us</Link>
+              <Link className='hover:text-[#FF4C4C]' href="/history" onClick={() => setIsOpen(false)}>History</Link>
             </div>
             <div className="!pt-2 flex flex-col gap-2">
-              <button className="bg-accent-red hover:bg-accent-redHover !px-4 !py-2 rounded !text-sm">
-                <Link href="/Shorten">Try Now</Link>
-              </button>
               <button className="border border-accent-red text-accent-red hover:bg-accent-red hover:text-white !px-4 !py-2 rounded !text-sm">
                 {session ? (
                   <div className='flex gap-2 items-center' onClick={() => handleSignOut()}>

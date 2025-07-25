@@ -40,5 +40,61 @@ export async function POST(req) {
 }
 
 export async function GET() {
-  return NextResponse.json({ message: "API is working!" })
+  try {
+    await connect(); // Connect to DB
+    const urls = await Url.find().sort({ _id: -1 }); // Get all entries, latest first
+    return NextResponse.json({ urls }); // Send history data
+  } catch (error) {
+    console.error("Error fetching history:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch history", detail: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+// // delete one entry
+// export async function DELETE(req) {
+//   try {
+//     await connect();
+//     const { shortName } = await req.json();
+
+//     if (!shortName) {
+//       return NextResponse.json({ error: 'Missing shortName' }, { status: 400 });
+//     }
+
+//     const deletedEntry = await Url.findOneAndDelete({ shortName });
+//     if (!deletedEntry) {
+//       return NextResponse.json({ error: 'Short name not found' }, { status: 404 });
+//     }
+
+//     return NextResponse.json({ message: 'Entry deleted successfully' });
+//   } catch (error) {
+//     console.error("Error deleting entry:", error);
+//     return NextResponse.json({ error: 'Internal Server Error', detail: error.message }, { status: 500 });
+//   }
+// }
+
+export async function DELETE(req) {
+  try {
+    await connect();
+
+    const { searchParams } = new URL(req.url);
+    const shortName = searchParams.get('shortName');
+
+    if (!shortName) {
+      return NextResponse.json({ error: 'Missing shortName' }, { status: 400 });
+    }
+
+    const deletedEntry = await Url.findOneAndDelete({ shortName });
+
+    if (!deletedEntry) {
+      return NextResponse.json({ error: 'Short name not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: 'Entry deleted successfully' });
+  } catch (error) {
+    console.error("Error deleting entry:", error);
+    return NextResponse.json({ error: 'Internal Server Error', detail: error.message }, { status: 500 });
+  }
 }
